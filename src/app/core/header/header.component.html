@@ -1,0 +1,38 @@
+<nav class="navbar navbar-default navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" routerLink="/lists">
+        <img width="100" alt="Listify" src="assets/logo.png">
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a routerLinkActive="active" routerLink="/lists">Inicio</a></li>
+        <ng-template [ngIf]="authService.isAuthenticated()">
+          <li><a routerLink="/{{ authService.username }}">Mis listas</a></li>
+          <li><a routerLink="/{{ authService.username }}/new">Crear lista</a></li>
+        </ng-template>
+        <ng-template [ngIf]="!authService.isAuthenticated()">
+          <li><a routerLink="/login">Mis listas</a></li>
+          <li><a routerLink="/login">Crear lista</a></li>
+        </ng-template>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <ng-template [ngIf]="!authService.isAuthenticated()">
+          <li><a routerLink="/login">Iniciar sesión</a></li>
+          <li><a routerLink="/register">Regístrate</a></li>
+        </ng-template>
+        <ng-template [ngIf]="authService.isAuthenticated()">
+          <li><a routerLink="/{{authService.username}}"><strong>Hola {{authService.username}}!</strong></a></li>
+          <li><a style="cursor: pointer;" (click)="onLogout()">Salir</a></li>
+        </ng-template>
+      </ul>
+    </div>
+  </div>
+</nav>

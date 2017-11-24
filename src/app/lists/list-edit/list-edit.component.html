@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="container" style="max-width: 360px">
+        <div class="listify">
+          <h1>Nueva lista<i class="fa fa-plus"></i></h1>
+        </div>
+        <form [formGroup]="listForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <input formControlName="name" id="name" name="name" class="form-control input" type="text" placeholder="Título" required>
+          </div>
+          <div class="form-group">
+            <input formControlName="image" id="image" name="image" class="form-control input" type="text" placeholder="URL de la imágen">
+          </div>
+          <div class="btn-group form-group" style="width: 100%">
+            <label style="width: 50%" class="btn btn-primary radio-inline"><input type="radio" formControlName="isPublic" value="true">Pública</label>
+            <label style="width: 50%" class="btn btn-primary radio-inline"><input type="radio" formControlName="isPublic" value="false">Privada</label>
+          </div>
+          <div class="row">
+            <div class="col-xs-12" formArrayName="items">
+              <div
+                class="row"
+                *ngFor="let itemCtrl of listForm.get('items').controls; let i = index"
+                [formGroupName]="i"
+                style="margin-top: 10px;">
+                <div class="col-xs-10">
+                  <input
+                    type="text"
+                    class="form-control input"
+                    formControlName="text">
+                </div>
+                <div class="col-xs-2">
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-danger"
+                    (click)="onDeleteItem(i)">X</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12" style="margin-top: 10px">
+                  <button
+                    style="margin-bottom: 15px"
+                    type="button"
+                    class="btn btn-lg btn-primary btn-block"
+                    (click)="onAddItem()">Añadir Item</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input id="save" [disabled]="!listForm.valid" type="submit" class="btn btn-lg btn-success btn-block" value="Guardar Lista">
+          </div>
+        </form>
+        <button (click)="onCancel()" class="btn btn-lg btn-warning btn-block">Volver</button>
+        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Form value: {{ listForm.value | json }}</p>
+<p>Form status: {{ listForm.status | json }}</p>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+  $("#newItem").keypress(function(event){
+    if(event.which === 13){
+      //grabbing new todo text from input
+      var todoText = $(this).val();
+      $(this).val("");
+      //create a new li and add to ul
+      $("ul").append("<li>" + todoText + "</li>")
+    }
+  });
+</script>
+

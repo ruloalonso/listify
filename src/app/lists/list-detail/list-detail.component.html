@@ -1,0 +1,57 @@
+<div class="container">
+  <div *ngIf="list" class="row">
+    <div class="col-md-4">
+      <div class="listify">
+        <h1>{{ list.name }}</h1>
+        <ul id="list">
+          <li *ngFor="let item of list.items">{{ item.text }}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="thumbnail">
+        <img style="max-width: 500px; max-height: 500px;" class="img-responsive" src="{{ list.image }}">
+        <div class="caption-full">
+          <h4>{{ list.name }}</h4>
+          <p><em><strong><a routerLink="/{{ list.author.username }}">
+            @{{ list.author.username }}</a></strong>
+           {{ list.date | date:'dd/MM/yy, HH:mm ' }}</em>
+            <span *ngIf="list.isPublic" class="badge badge-primary">Pública</span>
+            <span *ngIf="!list.isPublic" class="badge badge-secondary">Privada</span>
+            <i class="fa fa-heart text-danger" aria-hidden="true"></i> {{ list.likes.length }}
+          </p>
+          <button *ngIf="likeable" class="btn btn-danger" (click)="onLike()">Me gusta</button>
+          <button *ngIf="!likeable" class="btn btn-danger" disabled>Me gusta</button>
+          <button class="btn btn-warning" (click)="toggleComment()">Añadir comentario</button>
+          <button *ngIf="editMode" class="btn btn-danger" (click)="onDelete()">Borrar lista</button>
+        </div>
+      </div>
+
+      <div class="well">
+        <h3>Comentarios</h3>
+        <div class="addComment">
+          <div><app-comment-new [showMePartially]="showVar" [list_id]="list_id"></app-comment-new></div>
+        </div>
+        <div *ngFor="let comment of list.comments" class="row">
+          <div class="col-md-12">
+            <strong><a routerLink="/{{ comment.author.username }}">
+              @{{ comment.author.username }}</a></strong>
+            <span class="pull-right">
+              <button (click)="onDeleteComment(comment._id)" *ngIf="authService.username === comment.author.username" class="btn btn-xs btn-warning">Borrar Comentario</button>
+              {{ comment.date | date:'dd/MM/yy, HH:mm ' }}
+            </span>
+            <p>{{ comment.text }}</p>
+
+          </div>
+        </div>
+        <div class="text-right">
+
+        </div>
+        <hr>
+        <!--<% list.comments.forEach(function(comments){ %>-->
+
+        <!--<% }); %>-->
+      </div>
+    </div>
+  </div>
+</div>

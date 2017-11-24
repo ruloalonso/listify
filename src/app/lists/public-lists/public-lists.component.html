@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1>Listas públicas</h1>
+        <p>¿Te gustan las listas? A nosotros nos encantan...</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row text-center" style="display:flex; flex-wrap: wrap;">
+  <div *ngFor="let list of lists" class="col-md-3 col-sm-6">
+    <div class="thumbnail">
+      <a routerLink="/{{ list.author.username }}/{{ list._id }}"><img style="width: 100%" src="{{ list.image }}"></a>
+      <div class="caption">
+        <a routerLink="/{{ list.author.username }}/{{ list._id }}"><h4>{{ list.name }}</h4></a>
+        <p class="text-center">
+          <a routerLink="/{{ list.author.username }}">@{{ list.author.username }}</a> {{ list.date | date:'dd/MM/yy, HH:mm ' }}
+          <i class="fa fa-heart text-danger" aria-hidden="true"></i> {{ list.likes.length }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
