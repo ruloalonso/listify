@@ -32,7 +32,7 @@ export class SigninComponent implements OnInit {
     this.authService.signinUser(this.signinForm.value.username, this.signinForm.value.password)
     .subscribe(
       data => {
-        this.router.navigate(['../' + this.signinForm.value.username]);
+        this.router.navigate(['/lists']);
       },
       error => {
         this.alertService.error(error.error.msg);
