@@ -30,7 +30,7 @@ export class ListService {
   }
 
   getPublicLists() {
-    return this.http.get('https://listify-ruloalonso.c9users.io/api/lists/');
+    return this.http.get('https://listify-daw-api.herokuapp.com/api/lists/');
   }
   getList(id) {
     if (this.authService.isAuthenticated()) {
@@ -42,14 +42,14 @@ export class ListService {
           }
         });
     }
-    return this.http.get('https://listify-ruloalonso.c9users.io/api/lists/' + id);
+    return this.http.get('https://listify-daw-api.herokuapp.com/api/lists/' + id);
   }
   getPublicListsFromUser(username) {
-    return this.http.get('https://listify-ruloalonso.c9users.io/api/lists/user/' + username);
+    return this.http.get('https://listify-daw-api.herokuapp.com/api/lists/user/' + username);
   }
   getPrivateListsFromUser(username) {
     return this.http.get(
-      'https://listify-ruloalonso.c9users.io/api/lists/user/' + username + '/private',
+      'https://listify-daw-api.herokuapp.com/api/lists/user/' + username + '/private',
       {
         headers: {
           'Authorization': this.authService.token
@@ -59,7 +59,7 @@ export class ListService {
   saveList(list) {
     return this.http
       .post(
-        'https://listify-ruloalonso.c9users.io/api/lists',
+        'https://listify-daw-api.herokuapp.com/api/lists',
         {
           'name': list.name,
           'isPublic': list.isPublic,
@@ -76,7 +76,7 @@ export class ListService {
   deleteList(list_id) {
     return this.http
       .delete(
-        'https://listify-ruloalonso.c9users.io/api/lists/' + list_id,
+        'https://listify-daw-api.herokuapp.com/api/lists/' + list_id,
         {
           headers: {
             'Authorization': this.authService.token

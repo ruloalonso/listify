@@ -15,13 +15,13 @@ export class AuthService {
               private http: HttpClient) {}
 
   getUserInfo(username: string) {
-      return this.http.get('https://listify-ruloalonso.c9users.io/api/user/' + username);
+      return this.http.get('https://listify-daw-api.herokuapp.com/api/user/' + username);
   }
 
   signinUser(username: string, password: string) {
     return this.http
       .post(
-        'https://listify-ruloalonso.c9users.io/api/login',
+        'https://listify-daw-api.herokuapp.com/api/login',
         {'username': username, 'password': password},
         {headers : {
           'Content-Type' : 'application/json'
@@ -40,7 +40,7 @@ export class AuthService {
   signupUser(username: string, password: string) {
     return this.http
       .post(
-        'https://listify-ruloalonso.c9users.io/api/register',
+        'https://listify-daw-api.herokuapp.com/api/register',
         {'username': username, 'password': password},
         {headers : {
           'Content-Type' : 'application/json'

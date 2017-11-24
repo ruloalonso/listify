@@ -11,7 +11,7 @@ export class CommentService {
   }
 
   saveComment(text, list_id) {
-    const url = 'https://listify-ruloalonso.c9users.io/api/lists/' + list_id + '/comments';
+    const url = 'https://listify-daw-api.herokuapp.com/api/lists/' + list_id + '/comments';
     return this.http
       .post(
         url,
@@ -25,7 +25,7 @@ export class CommentService {
         });
   }
   deleteComment(list_id, comment_id) {
-    const url = 'https://listify-ruloalonso.c9users.io/api/lists/' + list_id + '/comments/' + comment_id;
+    const url = 'https://listify-daw-api.herokuapp.com/api/lists/' + list_id + '/comments/' + comment_id;
     return this.http
       .delete(
         url,
