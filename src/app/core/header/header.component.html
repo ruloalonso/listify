@@ -13,24 +13,24 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a routerLinkActive="active" routerLink="/lists">Inicio</a></li>
+        <li><a routerLinkActive="active" routerLink="/lists"><i class="fa fa-home" aria-hidden="true"></i> Inicio</a></li>
         <ng-template [ngIf]="authService.isAuthenticated()">
-          <li><a routerLink="/{{ authService.username }}">Mis listas</a></li>
-          <li><a routerLink="/{{ authService.username }}/new">Crear lista</a></li>
+          <li><a routerLink="/{{ authService.username }}"><i class="fa fa-sticky-note-o" aria-hidden="true"></i> Mis listas</a></li>
+          <li><a routerLink="/{{ authService.username }}/new"><i class="fa fa-pencil" aria-hidden="true"></i> Crear lista</a></li>
         </ng-template>
         <ng-template [ngIf]="!authService.isAuthenticated()">
-          <li><a routerLink="/login">Mis listas</a></li>
-          <li><a routerLink="/login">Crear lista</a></li>
+          <li><a routerLink="/login"><i class="fa fa-sticky-note-o" aria-hidden="true"></i> Mis listas</a></li>
+          <li><a routerLink="/login"><i class="fa fa-pencil" aria-hidden="true"></i> Crear lista</a></li>
         </ng-template>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <ng-template [ngIf]="!authService.isAuthenticated()">
-          <li><a routerLink="/login">Iniciar sesión</a></li>
-          <li><a routerLink="/register">Regístrate</a></li>
+          <li><a routerLink="/login"><i class="fa fa-user" aria-hidden="true"></i> Iniciar sesión</a></li>
+          <li><a routerLink="/register"><i class="fa fa-user-plus" aria-hidden="true"></i> Regístrate</a></li>
         </ng-template>
         <ng-template [ngIf]="authService.isAuthenticated()">
-          <li><a routerLink="/{{authService.username}}"><strong>Hola {{authService.username}}!</strong></a></li>
-          <li><a style="cursor: pointer;" (click)="onLogout()">Salir</a></li>
+          <li><a routerLink="/{{authService.username}}"><strong><i class="fa fa-hand-peace-o" aria-hidden="true"></i> Hola {{authService.username}}!</strong></a></li>
+          <li><a style="cursor: pointer;" (click)="onLogout()"><i class="fa fa-user-times" aria-hidden="true"></i> Salir</a></li>
         </ng-template>
       </ul>
     </div>
