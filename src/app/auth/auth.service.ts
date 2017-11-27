@@ -7,7 +7,7 @@ import { User } from '../shared/user.model';
 
 @Injectable()
 export class AuthService {
-  token: string;
+  token: string = null;
   username: string;
   user: User;
 
@@ -17,7 +17,6 @@ export class AuthService {
   getUserInfo(username: string) {
       return this.http.get('https://listify-daw-api.herokuapp.com/api/user/' + username);
   }
-
   signinUser(username: string, password: string) {
     return this.http
       .post(
@@ -36,7 +35,6 @@ export class AuthService {
             this.router.navigate(['/lists']);
         });
   }
-
   signupUser(username: string, password: string) {
     return this.http
       .post(
@@ -46,19 +44,20 @@ export class AuthService {
           'Content-Type' : 'application/json'
         }})
       .map(
-        (user: User) => {
-          this.token = user.token;
-          this.username = username;
+        (data: any) => {
+          this.token = data.user.token;
+          this.username = data.user.username;
+          localStorage.setItem('username', data.user.username);
+          localStorage.setItem('token', data.user.token);
+          this.user = data.user;
           this.router.navigate(['/lists']);
         });
   }
-
   logout() {
     this.token = null;
-    this.router.navigate(['/']);
     localStorage.clear();
+    this.router.navigate(['/']);
   }
-
   isAuthenticated() {
     return this.token != null;
   }

@@ -17,9 +17,9 @@ export class ListEditComponent implements OnInit {
 
   listForm = new FormGroup({
     name: new FormControl('', Validators.required),
-    image: new FormControl('', Validators.required),
+    image: new FormControl(''),
     isPublic: new FormControl('', Validators.required),
-    items: new FormArray([])
+    items: new FormArray([], Validators.required)
   });
 
   constructor(private router: Router,
