@@ -35,7 +35,7 @@ export class ListService {
   getList(id) {
     if (this.authService.isAuthenticated()) {
       return this.http.get(
-        'https://listify-ruloalonso.c9users.io/api/lists/' + id,
+        'https://listify-daw-api.herokuapp.com/api/lists/' + id,
         {
           headers: {
             'Authorization': this.authService.token
